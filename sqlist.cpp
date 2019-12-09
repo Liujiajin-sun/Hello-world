@@ -1,26 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define LIST_INTSIZE 50
-typedef char DataType;             /*ÔÚ´ËÀıÖĞÊı¾İÀàĞÍ²ÉÓÃ×Ö·ûÀàĞÍ*/
+typedef char DataType;             /*åœ¨æ­¤ä¾‹ä¸­æ•°æ®ç±»å‹é‡‡ç”¨å­—ç¬¦ç±»å‹*/
    
 
-typedef  struct {   DataType*  elem;                    /*ÏßĞÔ±íµÄ»ùµØÖ·*/
-			int  length;						/*ÏßĞÔ±íµ±Ç°µÄ³¤¶È*/
-			int  listsize;						/*ÏßĞÔ±íµ±Ç°·ÖÅäµÄ´æ´¢ÈİÁ¿*/
+typedef  struct {   DataType*  elem;                    /*çº¿æ€§è¡¨çš„åŸºåœ°å€*/
+			int  length;						/*çº¿æ€§è¡¨å½“å‰çš„é•¿åº¦*/
+			int  listsize;						/*çº¿æ€§è¡¨å½“å‰åˆ†é…çš„å­˜å‚¨å®¹é‡*/
 		} SeqList;   
 
 SeqList L;
 int InitSeqList(SeqList* L)
 { 
-	L->elem=(DataType *)malloc((LIST_INTSIZE+1)*sizeof(DataType));  /*Êı×éµÄ0ÔªËØÃ»ÓĞÊ¹ÓÃ*/
+	L->elem=(DataType *)malloc((LIST_INTSIZE+1)*sizeof(DataType));  /*æ•°ç»„çš„0å…ƒç´ æ²¡æœ‰ä½¿ç”¨*/
 	if (L->elem==NULL)
 	{
-		printf("\t\t\tÄÚ´æ·ÖÅä´íÎó\n");
+		printf("\t\t\tå†…å­˜åˆ†é…é”™è¯¯\n");
 		return 0;
 	}
 	L->length=0;
 	L->listsize=LIST_INTSIZE;
-	printf("\t\t\tÄÚ´æ·ÖÅä³É¹¦\n");
+	printf("\t\t\tå†…å­˜åˆ†é…æˆåŠŸ\n");
 	return 1;
 }
 
@@ -28,29 +28,29 @@ int  InsertSeqList(SeqList* L, int i, DataType x)
 {   
 	int j=0; 
 //		printf("i=%d\n", i);
-    if (L->length==LIST_INTSIZE)							/*Ë³Ğò±íÒÑÂú£¬²»ÄÜ²åÈë*/
+    if (L->length==LIST_INTSIZE)							/*é¡ºåºè¡¨å·²æ»¡ï¼Œä¸èƒ½æ’å…¥*/
     {   
 		printf("%d\n",L->length);
 		printf("%d\n",L->listsize);
-		printf("\t\t\tË³Ğò±íÒÑÂú!\n"); 
+		printf("\t\t\té¡ºåºè¡¨å·²æ»¡!\n"); 
 		return 0; 
     }  	
     else
     {
-		if(i<1 || i>L->length+1)					/*¼ì²é²åÈëÎ»ÖÃµÄºÏ·¨ĞÔ*/				
+		if(i<1 || i>L->length+1)					/*æ£€æŸ¥æ’å…¥ä½ç½®çš„åˆæ³•æ€§*/				
         {   
-		    printf("\t\t\tÎ»ÖÃ²»ºÏ·¨!");
+		    printf("\t\t\tä½ç½®ä¸åˆæ³•!");
 			return 0;
 		} 
         else
 		{
-	            for(j=L->length;j>=i;j--)				/*Ë³ĞòÒÆ¶¯ÔªËØ*/
+	            for(j=L->length;j>=i;j--)				/*é¡ºåºç§»åŠ¨å…ƒç´ */
         	    {     
 			L->elem[j+1]=L->elem[j];  
 	  	    }
-			L->elem[i]=x;                            	/*ĞÂÔªËØ²åÈë*/				
-        	    L->length++;					/*±í³¤¼ÓÒ»*/
-			return 1;/*²åÈë³É¹¦£¬·µ»Ø*/
+			L->elem[i]=x;                            	/*æ–°å…ƒç´ æ’å…¥*/				
+        	    L->length++;					/*è¡¨é•¿åŠ ä¸€*/
+			return 1;/*æ’å…¥æˆåŠŸï¼Œè¿”å›*/
 		}
 	}
 }
@@ -59,47 +59,47 @@ int  InsertSeqList(SeqList* L, int i, DataType x)
 int DeleteSeqList(SeqList* L, int i)
 {
 	int  j;
-    if(i<1 || i>L->length)   					       /*¼ì²éÉ¾³ıÎ»ÖÃµÄºÏ·¨ĞÔ*/
+    if(i<1 || i>L->length)   					       /*æ£€æŸ¥åˆ é™¤ä½ç½®çš„åˆæ³•æ€§*/
     { 
-		printf ("²»´æÔÚµÚi¸öÔªËØ!\n"); 
+		printf ("ä¸å­˜åœ¨ç¬¬iä¸ªå…ƒç´ !\n"); 
 		return 0; 
 	}
     else
 	{
-		for(j=i;j<L->length;j++)					/*ÏòÉÏË³ĞòÒÆ¶¯ÔªËØ*/
+		for(j=i;j<L->length;j++)					/*å‘ä¸Šé¡ºåºç§»åŠ¨å…ƒç´ */
 			L->elem[j]=L->elem[j+1]; 
-		L->length--;   							/*±í³¤¼õÒ»*/ 
-		return 1;      						         /*É¾³ı³É¹¦*/
+		L->length--;   							/*è¡¨é•¿å‡ä¸€*/ 
+		return 1;   						         /*åˆ é™¤æˆåŠŸ*/
      }
 }
 
 int LenSeqList(SeqList* L)
-/* ·µ»ØË³Ğò±í£ÌµÄ³¤¶È*/
+/* è¿”å›é¡ºåºè¡¨ï¼¬çš„é•¿åº¦*/
 {	
   return  L->length;
 }
 
 int SearchSeqList(SeqList* L, DataType y)
-/*ÔÚÏßĞÔ±íÖĞ²éÕÒÖµÎª£øµÄÊı¾İÔªËØ*/
+/*åœ¨çº¿æ€§è¡¨ä¸­æŸ¥æ‰¾å€¼ä¸ºï½˜çš„æ•°æ®å…ƒç´ */
 {
 	for(int m=0; m<L->length; m++)
 	{	if(L->elem[m+1]==y)
-	{	printf("\n\t\t\t²éµ½´ËÊı£¬ÔÚ±íÖĞÎ»ÖÃÊÇ%d\n",m+1);
+	{	printf("\n\t\t\tæŸ¥åˆ°æ­¤æ•°ï¼Œåœ¨è¡¨ä¸­ä½ç½®æ˜¯%d\n",m+1);
 	return 1;}
 }
-	printf("\n\t\t\t²éÎŞ´ËÊı\n");
+	printf("\n\t\t\tæŸ¥æ— æ­¤æ•°\n");
 	
 	return 0;
 }
 
 char GetfromSeqList(SeqList* L, int i)
-/*·µ»ØÏßĞÔ±íÖĞµÄµÚ£é¸öÔªËØµÄÖµ*/
+/*è¿”å›çº¿æ€§è¡¨ä¸­çš„ç¬¬ï½‰ä¸ªå…ƒç´ çš„å€¼*/
 {
 
 	printf("%d",i);
 	if(i<1 || i>L->length)
 	{
-		printf("ÊäÈë·Ç·¨Î»ÖÃ");
+		printf("è¾“å…¥éæ³•ä½ç½®");
 		return false;
 	}
 	else
@@ -110,9 +110,9 @@ char GetfromSeqList(SeqList* L, int i)
 
 void ShowSeqList(SeqList* L)
 {	int i;
-	printf("\n\t\t\tÏÔÊ¾µ±Ç°ÏßĞÔ±íµÄËùÓĞÔªËØ£º");
+	printf("\n\t\t\tæ˜¾ç¤ºå½“å‰çº¿æ€§è¡¨çš„æ‰€æœ‰å…ƒç´ ï¼š");
 	if(L->length==0)
-		printf("\n\t\t\tÏßĞÔ±íÎª¿Õ!\n");
+		printf("\n\t\t\tçº¿æ€§è¡¨ä¸ºç©º!\n");
 	else
 	{
 		printf("\n\t\t");
@@ -124,27 +124,27 @@ void ShowSeqList(SeqList* L)
 
 void Initialization()
 {
-  //ÔÚÆÁÄ»ÉÏ·½ÏÔÊ¾²Ù×÷ÃüÁîÇåµ¥£º
+  //åœ¨å±å¹•ä¸Šæ–¹æ˜¾ç¤ºæ“ä½œå‘½ä»¤æ¸…å•ï¼š
 	printf("\n\n\n\n");
-	printf("\t\t\t--Ïß ĞÔ Ë³ Ğò ±í--\n");
+	printf("\t\t\t--çº¿ æ€§ é¡º åº è¡¨--\n");
 	printf("\n\t\t\t************************************");
-	printf("\n\t\t\t*       1-------Ë³Ğò±í³õÊ¼»¯       *");
-	printf("\n\t\t\t*       2-------²å      Èë         *");
-	printf("\n\t\t\t*       3-------É¾      ³ı         *");
-	printf("\n\t\t\t*       4-------Çó  ±í  ³¤         *");
-	printf("\n\t\t\t*       5-------°´ Öµ ²éÕÒ         *");
-	printf("\n\t\t\t*       6-------¶ÁÈ¡ÔªËØÖµ         *");
-	printf("\n\t\t\t*       7-------ÏÔÊ¾ÏßĞÔ±í         *");
-	printf("\n\t\t\t*       0-------ÍË      ³ö         *");
+	printf("\n\t\t\t*       1-------é¡ºåºè¡¨åˆå§‹åŒ–       *");
+	printf("\n\t\t\t*       2-------æ’      å…¥         *");
+	printf("\n\t\t\t*       3-------åˆ       é™¤         *");
+	printf("\n\t\t\t*       4-------æ±‚  è¡¨  é•¿         *");
+	printf("\n\t\t\t*       5-------æŒ‰ å€¼ æŸ¥æ‰¾         *");
+	printf("\n\t\t\t*       6-------è¯»å–å…ƒç´ å€¼         *");
+	printf("\n\t\t\t*       7-------æ˜¾ç¤ºçº¿æ€§è¡¨         *");
+	printf("\n\t\t\t*       0-------é€€      å‡º         *");
 	printf("\n\t\t\t************************************\n");
-	printf("\t\t\tÇëÑ¡Ôñ²Ëµ¥ºÅ(0--7)£º");
+	printf("\t\t\tè¯·é€‰æ‹©èœå•å·(0--7)ï¼š");
   
 }//Initialization
 
 char ReadCommand(char cmd)
 {
-   //¶ÁÈë²Ù×÷ÃüÁî·û
-   //ÏÔÊ¾¼üÈë²Ù×÷ÃüÁî·ûµÄÌáÊ¾ĞÅÏ¢
+   //è¯»å…¥æ“ä½œå‘½ä»¤ç¬¦
+   //æ˜¾ç¤ºé”®å…¥æ“ä½œå‘½ä»¤ç¬¦çš„æç¤ºä¿¡æ¯
    do{ cmd=getchar();
 	}while(cmd!='1'&&cmd!='2'&&cmd!='3'&&cmd!='4'&&cmd!='5'&&cmd!='6'&&cmd!='7'&&cmd!='0');
    return cmd;
@@ -158,58 +158,58 @@ void Interpret(char cmd)
 	DataType x=' ';
 	DataType y=' ';
 
-	//½âÊÍÖ´ĞĞ²Ù×÷ÃüÁî cmd
+	//è§£é‡Šæ‰§è¡Œæ“ä½œå‘½ä»¤ cmd
   switch(cmd){
-   case '1': //³õÊ¼»¯£»
+   case '1': //åˆå§‹åŒ–ï¼›
    		  InitSeqList(&L);
           break;
-  case '2': //²åÈë£»
-		  printf("\n\t\t\tÇëÊäÈëµÄÎ»ÖÃiºÍÊıÖµx(ÊäÈë¸ñÊ½£ºi, x):");
+  case '2': //æ’å…¥ï¼›
+		  printf("\n\t\t\tè¯·è¾“å…¥çš„ä½ç½®iå’Œæ•°å€¼x(è¾“å…¥æ ¼å¼ï¼ši, x):");
 		  scanf("%d,%c",&i,&x);
 		  InsertSeqList(&L, i, x);
 	  	  ShowSeqList(&L);
           break;
-  case '3': //É¾³ı
-	      printf("\n\t\t\tÇëÊäÈëÒªÉ¾³ıÔªËØµÄÎ»Ğò: ");
+  case '3': //åˆ é™¤
+	      printf("\n\t\t\tè¯·è¾“å…¥è¦åˆ é™¤å…ƒç´ çš„ä½åº: ");
 		  scanf("%d",&i);
 		  DeleteSeqList(&L, i);
      	  ShowSeqList(&L);
 		  break;
-  case '4'://Çó³¤¶È
-		  printf("\n\t\t\tËùÇó±í³¤ÊÇ£º\n");
+  case '4'://æ±‚é•¿åº¦
+		  printf("\n\t\t\tæ‰€æ±‚è¡¨é•¿æ˜¯ï¼š\n");
 		  printf("\n\t\t\t%d\n",LenSeqList(&L));
 		  ShowSeqList(&L);
 		  break;
-  case '5': //¼ìË÷
-		  printf("\n\t\t\tÊäÈëËù²éÔªËØÖµ: ");
-		  getchar();//ÏûºÄµô\n
+  case '5': //æ£€ç´¢
+		  printf("\n\t\t\tè¾“å…¥æ‰€æŸ¥å…ƒç´ å€¼: ");
+		  getchar();//æ¶ˆè€—æ‰\n
 		  scanf("%c",&y);
 	      SearchSeqList(&L, y);
    	  	  ShowSeqList(&L);
 	      break;
-  case '6'://»ñÈ¡Ä³Î»ÖÃµÄÊı¾İÔªËØ
-		  printf("\n\t\t\tÊäÈëÊı¾İÔªËØËùÔÚÎ»ÖÃ: ");
+  case '6'://è·å–æŸä½ç½®çš„æ•°æ®å…ƒç´ 
+		  printf("\n\t\t\tè¾“å…¥æ•°æ®å…ƒç´ æ‰€åœ¨ä½ç½®: ");
 		  getchar();
 		  scanf("%d",&i);    
-		  printf("\n\t\t\tË³Ğò±íµÚ%d¸öÎ»ÖÃµÄÊı¾İÔªËØÊÇ%c",i,GetfromSeqList(&L, i));
+		  printf("\n\t\t\té¡ºåºè¡¨ç¬¬%dä¸ªä½ç½®çš„æ•°æ®å…ƒç´ æ˜¯%c",i,GetfromSeqList(&L, i));
   	  	  ShowSeqList(&L);
 		  break;
-  case '7': //ÏÔÊ¾ÏßĞÔ±í
+  case '7': //æ˜¾ç¤ºçº¿æ€§è¡¨
 	  	  ShowSeqList(&L);
 	      break;
   }
 }//Interpret
 
-//Ö÷º¯Êı
+//ä¸»å‡½æ•°
 int main()
 {
   char cmd;
-  Initialization(); //³õÊ¼»¯
+  Initialization(); //åˆå§‹åŒ–
   do{
-      cmd=ReadCommand(cmd); //¶ÁÈëÒ»¸ö²Ù×÷ÃüÁî·û
-      Interpret(cmd);  //½âÊÍÖ´ĞĞ²Ù×÷ÃüÁî·û
+      cmd=ReadCommand(cmd); //è¯»å…¥ä¸€ä¸ªæ“ä½œå‘½ä»¤ç¬¦
+      Interpret(cmd);  //è§£é‡Šæ‰§è¡Œæ“ä½œå‘½ä»¤ç¬¦
       if(cmd!='0')
-		  printf("\n\t\t\tÇëÑ¡ÔñÃüÁî´úÂë£º");
+		  printf("\n\t\t\tè¯·é€‰æ‹©å‘½ä»¤ä»£ç ï¼š");
   }while(cmd!='0');
   return 0;
 }//main
